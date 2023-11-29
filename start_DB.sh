@@ -1,6 +1,10 @@
 #!/bin/bash
 
-export "$(grep -v '^#' .env | xargs -d '\n')" || exit 1
+# Export the environment variables
+set -a
+source .env || exit 1
+set +a
+env | grep -E '^(TZ|POSTGRES|HOST|FOLDER|CREDSFILE|CONTAINER)' || exit 1
 
 docker run \
   -it \
