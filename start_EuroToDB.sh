@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/sudo /bin/sh
 
 # Export the environment variables
 set -a
@@ -36,5 +36,5 @@ else
     screen -S EuroWatchdog -dm bash -c "$ROOT_FOLDER/start_watchdog.sh"
 fi
 
-cd -
+cd - || exit 1
 # EOF

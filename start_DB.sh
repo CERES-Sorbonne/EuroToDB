@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/sudo /bin/sh
 
 # Export the environment variables
 set -a
@@ -6,7 +6,7 @@ source .env || exit 1
 set +a
 env | grep -E '^(TZ|POSTGRES|HOST|FOLDER|CREDSFILE|CONTAINER)' || exit 1
 
-docker run \
+sudo docker run \
   -it \
   --name="${CONTAINER_NAME}" \
   -e TZ="${TZ}" \

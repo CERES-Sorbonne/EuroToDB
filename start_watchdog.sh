@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/sudo /bin/sh
 
 # Export the environment variables
 set -a
@@ -8,7 +8,7 @@ env | grep -E '^(TZ|POSTGRES|HOST|FOLDER|CREDSFILE|CONTAINER)' || exit 1
 
 
 # Check if the container is running
-if [ "$(docker inspect -f '{{.State.Running}}' "${HOST_CONTAINERNAME}")" = "true" ]; then
+if [ "$(sudo docker inspect -f '{{.State.Running}}' "${HOST_CONTAINERNAME}")" = "true" ]; then
   echo "Container ${HOST_CONTAINERNAME} is running."
 else
   echo "Container ${HOST_CONTAINERNAME} is not running."
@@ -16,7 +16,7 @@ else
 fi
 
 # Check if the container is healthy
-if [ "$(docker inspect -f '{{.State.Health.Status}}' "${HOST_CONTAINERNAME}")" = "healthy" ]; then
+if [ "$(sudo docker inspect -f '{{.State.Health.Status}}' "${HOST_CONTAINERNAME}")" = "healthy" ]; then
   echo "Container ${HOST_CONTAINERNAME} is healthy."
 else
   echo "Container ${HOST_CONTAINERNAME} is not healthy."
