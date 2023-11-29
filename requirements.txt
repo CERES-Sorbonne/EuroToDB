@@ -1,0 +1,4 @@
+pandas
+tqdm
+psycopg2-binary
+pydantic
