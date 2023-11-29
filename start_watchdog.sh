@@ -1,4 +1,4 @@
-#!/usr/bin/sudo /bin/bash
+#!/bin/bash
 
 # Export the environment variables
 set -a
