@@ -24,22 +24,15 @@ else
   DB_IS_RUNNING=0
 fi
 
-# Check if the container is healthy
-if [ "$(sudo docker inspect -f '{{.State.Health.Status}}' "${CONTAINER_NAME}")" = "healthy" ]; then
-  echo "Container ${CONTAINER_NAME} is healthy."
-else
-  echo "Container ${CONTAINER_NAME} is not healthy."
-  DB_IS_RUNNING=0
-fi
-
 if [ -z "$DB_IS_RUNNING" ]
 then
     echo "EuroDB service currently not running, starting..."
     screen -S EuroDB -dm bash -c "$ROOT_FOLDER/start_DB.sh"
 else
-    echo "EuroDB already running, restarting..."
-    screen -S EuroDB -X quit
-    screen -S EuroDB -dm bash -c "$ROOT_FOLDER/start_DB.sh"
+#    echo "EuroDB already running, restarting..."
+#    screen -S EuroDB -X quit
+#    screen -S EuroDB -dm bash -c "$ROOT_FOLDER/start_DB.sh"
+     echo "EuroDB already running"
 fi
 
 # Wait for the DB to start
