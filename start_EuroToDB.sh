@@ -13,18 +13,18 @@ git pull origin master --quiet || exit 1
 
 source "$ROOT_FOLDER"/venv/bin/activate || exit 1
 
-DB_IS_RUNNING=1
 WATCHDOG_IS_RUNNING=$(screen -ls | grep EuroWatchdog)
 
 # Check if the container is running
 if [ "$(sudo docker inspect -f '{{.State.Running}}' "${CONTAINER_NAME}")" = "true" ]; then
   echo "Container ${CONTAINER_NAME} is running."
+  DB_IS_RUNNING=1
 else
   echo "Container ${CONTAINER_NAME} is not running."
   DB_IS_RUNNING=0
 fi
 
-if [ -z "$DB_IS_RUNNING" ]
+if [ "$DB_IS_RUNNING" -eq "0" ]
 then
     echo "EuroDB service currently not running, starting..."
     screen -S EuroDB -dm bash -c "$ROOT_FOLDER/start_DB.sh"
