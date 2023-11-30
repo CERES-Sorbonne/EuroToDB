@@ -7,7 +7,7 @@ assert env_path.exists() and env_path.is_file() and env_path.stat().st_size > 0,
 with env_path.open("r", encoding="utf-8") as f:
     env = f.readlines()
 
-env = {line.split("=")[0]: line.split("=")[1].strip() for line in env if not line.startswith("#") and line.strip()}
+env = {line.split("=")[0]: line.split("=")[1].strip().strip('"') for line in env if not line.startswith("#") and line.strip()}
 
 creds = {
     "database": env["POSTGRES_DB"],
