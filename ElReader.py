@@ -226,13 +226,15 @@ class ElReader:
         return articles
 
     def __del__(self):
-        self.conn.close()
+        if hasattr(self, "conn"):
+            self.conn.close()
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.conn.close()
+        if hasattr(self, "conn"):
+            self.conn.close()
 
     def __repr__(self):
         return f"ElReader({self.creds})"
