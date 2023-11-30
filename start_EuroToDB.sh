@@ -17,18 +17,18 @@ DB_IS_RUNNING=1
 WATCHDOG_IS_RUNNING=$(screen -ls | grep EuroWatchdog)
 
 # Check if the container is running
-if [ "$(sudo docker inspect -f '{{.State.Running}}' "${HOST_CONTAINERNAME}")" = "true" ]; then
-  echo "Container ${HOST_CONTAINERNAME} is running."
+if [ "$(sudo docker inspect -f '{{.State.Running}}' "${CONTAINER_NAME}")" = "true" ]; then
+  echo "Container ${CONTAINER_NAME} is running."
 else
-  echo "Container ${HOST_CONTAINERNAME} is not running."
+  echo "Container ${CONTAINER_NAME} is not running."
   DB_IS_RUNNING=0
 fi
 
 # Check if the container is healthy
-if [ "$(sudo docker inspect -f '{{.State.Health.Status}}' "${HOST_CONTAINERNAME}")" = "healthy" ]; then
-  echo "Container ${HOST_CONTAINERNAME} is healthy."
+if [ "$(sudo docker inspect -f '{{.State.Health.Status}}' "${CONTAINER_NAME}")" = "healthy" ]; then
+  echo "Container ${CONTAINER_NAME} is healthy."
 else
-  echo "Container ${HOST_CONTAINERNAME} is not healthy."
+  echo "Container ${CONTAINER_NAME} is not healthy."
   DB_IS_RUNNING=0
 fi
 
