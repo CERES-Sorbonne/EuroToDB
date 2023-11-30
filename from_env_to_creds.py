@@ -17,7 +17,7 @@ creds = {
     "port": env["POSTGRES_PORT"],
 }
 
-creds_path = Path(env["CREDS_PATH"])
+creds_path = Path(env["CREDSFILE"])
 
 with creds_path.open("w", encoding="utf-8") as f:
     json.dump(creds, f, indent=4)
