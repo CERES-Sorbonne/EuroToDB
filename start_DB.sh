@@ -12,7 +12,7 @@ if [ ! -d "${POSTGRES_DATA}" ]; then
 fi
 
 # Check if the container exists
-CONTAINER_EXISTS=$(sudo docker ps -a | grep "${CONTAINER_NAME}")
+CONTAINER_EXISTS=$(sudo docker ps -a | grep -q "${CONTAINER_NAME}")
 if [ -z "$CONTAINER_EXISTS" ]
 then
     sudo docker start -ia "${CONTAINER_NAME}" || exit 1
