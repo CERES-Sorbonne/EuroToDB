@@ -5,12 +5,15 @@ import json
 
 from ElReader import ElReader
 
-def main(credsfile: str | Path | dict, folder_to_watch : str | Path):
+def main(credsfile: str | Path | dict, folder_to_watch : str | Path, folder_to_stash: str | Path):
     if isinstance(credsfile, str):
         credsfile = Path(credsfile)
 
     if isinstance(folder_to_watch, str):
         folder_to_watch = Path(folder_to_watch)
+
+    if isinstance(folder_to_stash, str):
+        folder_to_stash = Path(folder_to_stash)
 
     assert (
     credsfile.exists()
@@ -43,7 +46,9 @@ def main(credsfile: str | Path | dict, folder_to_watch : str | Path):
 
             reader.insert_file(data)
             print(f"=> terminée en {time.perf_counter() - start:.2f} secondes.")
-            file.unlink()
+
+            if folder_to_stash:
+                file.rename(folder_to_stash / file.name)
 
         else:
             sleep(60)
@@ -52,10 +57,11 @@ if __name__ == "__main__":
     from argparse import ArgumentParser
     parser = ArgumentParser()
 
-    parser.add_argument("credsfile", help="Chemin vers le fichier creds.json")
-    parser.add_argument("folder_to_watch", help="Dossier à surveiller")
+    parser.add_argument("credsfile", help="Chemin vers le fichier creds.json", type=Path, required=True)
+    parser.add_argument("folder_to_watch", help="Dossier à surveiller", type=Path, required=True)
+    parser.add_argument("folder_to_stash", help="Dossier où déplacer les fichiers traités", type=Path, required=True)
 
     args = parser.parse_args()
 
-    main(args.credsfile, args.folder_to_watch)
+    main(args.credsfile, args.folder_to_watch, args.folder_to_stash)
 
