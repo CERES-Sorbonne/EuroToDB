@@ -35,7 +35,8 @@ def main(credsfile: str | Path | dict, folder_to_watch : str | Path, folder_to_s
     reader = ElReader(creds)
 
     while True:
-        for file in folder_to_watch.glob("*.json"):
+        files = set(folder_to_watch.glob("*.json")).difference(set(folder_to_stash.glob("*.json")))
+        for file in files:
             start = time.perf_counter()
             print(f"Insertion de {file.name}...")  # , end=" ")
             try:
