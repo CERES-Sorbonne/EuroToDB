@@ -57,9 +57,9 @@ if __name__ == "__main__":
     from argparse import ArgumentParser
     parser = ArgumentParser()
 
-    parser.add_argument("credsfile", help="Chemin vers le fichier creds.json", type=Path, required=True)
-    parser.add_argument("folder_to_watch", help="Dossier à surveiller", type=Path, required=True)
-    parser.add_argument("folder_to_stash", help="Dossier où déplacer les fichiers traités", type=Path, required=True)
+    parser.add_argument("credsfile", help="Chemin vers le fichier creds.json", type=Path)  # , required=True)
+    parser.add_argument("folder_to_watch", help="Dossier à surveiller", type=Path)  # , required=True)
+    parser.add_argument("folder_to_stash", help="Dossier où déplacer les fichiers traités", type=Path)  # , required=True)
 
     args = parser.parse_args()
 
