@@ -48,8 +48,7 @@ def main(credsfile: str | Path | dict, folder_to_watch : str | Path, folder_to_s
             reader.insert_file(data)
             print(f"=> terminée en {time.perf_counter() - start:.2f} secondes.")
 
-            if folder_to_stash:
-                file.rename(folder_to_stash / file.name)
+            file.rename(folder_to_stash / file.name)
 
         else:
             sleep(60)
