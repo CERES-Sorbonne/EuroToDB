@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-env_path = Path('.env')
+env_path = Path('.env_e2d')
 assert env_path.exists() and env_path.is_file() and env_path.stat().st_size > 0, f"{env_path.name} absent ou vide."
 
 with env_path.open("r", encoding="utf-8") as f:

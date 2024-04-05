@@ -2,7 +2,7 @@
 
 # Export the environment variables
 set -a
-source .env || exit 1
+source .env_e2d || exit 1
 set +a
 env | grep -E '^(TZ|POSTGRES|HOST|FOLDER|CREDSFILE|CONTAINER)' || exit 1
 
